@@ -7,7 +7,9 @@ import com.jumio.notificationSystem.enums.NotificationStatus;
 import com.jumio.notificationSystem.queue.NotificationPublisher;
 import com.jumio.notificationSystem.repository.NotificationRepository;
 import com.jumio.notificationSystem.repository.UserRepository;
+import com.jumio.notificationSystem.util.NotificationScheduler;
 import com.jumio.notificationSystem.util.NotificationTemplateUtil;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -69,9 +71,32 @@ public class NotificationService {
                 .toList();
     }
 
-    public Notification getNotification(Long id) {
+    public Notification trackNotification(Long id) {
 
         return notificationRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Notification not found"));
+    }
+
+    public Notification scheduleNotification(@Valid SendNotificationRequest request) {
+        User user = userRepository.findById(request.getUserId())
+                .orElseThrow(() ->
+                        new RuntimeException("User not found"));
+
+        Notification notification = new Notification();
+
+        notification.setUser(user);
+        notification.setTitle(request.getTitle());
+        notification.setContent(request.getContent());
+        notification.setChannelType(request.getChannelType());
+        notification.setPriority(request.getNotificationPriority());
+        notification.setStatus(NotificationStatus.PENDING);
+
+        notification.setScheduledTime(
+                request.getScheduledDateTime()
+        );
+
+        notification.setRetryCount(0);
+
+        return notificationRepository.save(notification);
     }
 }
