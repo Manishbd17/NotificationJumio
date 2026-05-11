@@ -8,13 +8,34 @@ Features Send notifications using Email, SMS and Push channels Schedule notifica
 
 API Endpoints
 
+Register User POST /api/v1/users Sample Request : 
+
+{
+  "name": "John Root",
+  "email": "john@gmail.com",
+  "phone": "9876543210"
+}
+
 Send Notification POST /api/v1/notifications/send Sample Request:
 
-{ "userId": 1, "channelType": "EMAIL", "priority": "HIGH", "title": "Payment Successful", "content": "Your payment was successful" }
+{
+    "userId": 1,
+    "channelType": "EMAIL",
+    "notificationPriority": "HIGH",
+    "title": "Payment Successful",
+    "content": "Your payment was successful"
+}
 
 Schedule Notification POST /api/v1/notifications/send Sample Request:
 
-{ "userId": 1, "channelType": "SMS", "priority": "MEDIUM", "content": "Reminder Notification", "scheduledTime": "2026-05-11T10:30:00" }
+{
+    "userId": 1,
+    "channelType": "SMS",
+    "notificationPriority": "MEDIUM",
+    "content": "Reminder Notification",
+    "scheduledTime": "2026-05-11T10:30:00"
+}
+
 
 Bulk Notifications POST /api/v1/notifications/bulk
 
@@ -23,3 +44,10 @@ Get Notification Status GET /api/v1/notifications/{id}
 Technologies Used
 
 Java 17, Spring Boot, Apache Kafka, H2 Database, Maven, JUnit, Mockito.
+
+While using an IDE, we can right-click the main class and choose "Run" or use the IDE's run button.
+
+Once started , the application will run on port 8080 . We can verify that through postman or any API tester using this URL : http://localhost:8080
+
+POSTMAN Collection URL to test the APIs : https://jumioassignment.postman.co/workspace/JumioAssignment~e955d62e-a66a-48a2-8589-39e8fd5ce6f6/collection/33479886-1115e3a7-21db-4c94-af5c-22f19d8540f9?action=share&source=copy-link&creator=33479886
+
