@@ -1,4 +1,4 @@
-Excalidraw Design Link : https://excalidraw.com/#json=cHkqjPiZVeeh5XI7xd7fx,YTKwBTvRkq2aoaGz8XW6eg
+Excalidraw Design Link : https://excalidraw.com/#json=_scQ-KBhKhe1IMa7U8p3n,vgQgMYGCPi94FvFXuATt6w
 
 Notification System is a RESTful API built using Java and Spring Boot that supports sending notifications through multiple channels such as Email, SMS and Push Notifications. The system supports real-time and scheduled notifications along with priority-based processing, retry mechanisms and bulk notification delivery. The application is designed with clear separation of concerns between notification generation, scheduling, retry handling and channel delivery to ensure extensibility and maintainability.
 
