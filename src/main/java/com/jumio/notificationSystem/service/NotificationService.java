@@ -4,6 +4,8 @@ import com.jumio.notificationSystem.dto.SendNotificationRequest;
 import com.jumio.notificationSystem.entity.Notification;
 import com.jumio.notificationSystem.entity.User;
 import com.jumio.notificationSystem.enums.NotificationStatus;
+import com.jumio.notificationSystem.exception.NotificationNotFoundException;
+import com.jumio.notificationSystem.exception.UserNotFoundException;
 import com.jumio.notificationSystem.queue.NotificationPublisher;
 import com.jumio.notificationSystem.repository.NotificationRepository;
 import com.jumio.notificationSystem.repository.UserRepository;
@@ -26,7 +28,7 @@ public class NotificationService {
     public Notification sendNotification(SendNotificationRequest request) {
 
         User user = userRepository.findById(request.getUserId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
 
         Notification notification =  new Notification();
 
@@ -74,13 +76,13 @@ public class NotificationService {
     public Notification trackNotification(Long id) {
 
         return notificationRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Notification not found"));
+                .orElseThrow(() -> new NotificationNotFoundException("Notification not found"));
     }
 
     public Notification scheduleNotification(@Valid SendNotificationRequest request) {
         User user = userRepository.findById(request.getUserId())
                 .orElseThrow(() ->
-                        new RuntimeException("User not found"));
+                        new UserNotFoundException("User not found"));
 
         Notification notification = new Notification();
 
