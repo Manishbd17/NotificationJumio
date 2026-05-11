@@ -4,7 +4,10 @@ Notification System is a RESTful API built using Java and Spring Boot that suppo
 
 The application uses RabbitMQ for asynchronous notification processing and H2 Database for storing notification history, scheduling information and user preferences. Retry handling is implemented using exponential backoff logic for transient failures. The project also follows extensible design principles using interfaces and factory patterns so that new channels such as WhatsApp or Slack can be integrated with minimal changes.
 
-Features Send notifications using Email, SMS and Push channels Schedule notifications for future delivery Retry failed notifications using exponential backoff Priority-based notification processing Bulk notification support Notification status tracking Extensible channel architecture Unit tests for retry logic, priority handling and channel selection
+Features -  Send notifications using Email, SMS and Push channels Schedule notifications for future delivery, Retry failed notifications using exponential backoff, Priority-based notification, processing Bulk notification, support Notification status ,tracking Extensible channel architecture.
+
+
+Unit tests for retry logic, priority handling and channel selection
 
 API Endpoints
 
