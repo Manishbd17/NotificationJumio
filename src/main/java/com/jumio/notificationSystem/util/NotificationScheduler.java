@@ -1,8 +1,9 @@
-package com.jumio.notificationSystem.service;
+package com.jumio.notificationSystem.util;
 
 
 import com.jumio.notificationSystem.entity.Notification;
 import com.jumio.notificationSystem.enums.NotificationStatus;
+import com.jumio.notificationSystem.queue.NotificationPublisher;
 import com.jumio.notificationSystem.repository.NotificationRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

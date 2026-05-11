@@ -1,4 +1,4 @@
-package com.jumio.notificationSystem.service;
+package com.jumio.notificationSystem.queue;
 
 import com.jumio.notificationSystem.configs.RabbitMQConfig;
 import com.jumio.notificationSystem.entity.Notification;

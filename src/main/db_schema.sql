@@ -1,5 +1,5 @@
 CREATE TABLE users (
-       id BIGINT AUTO_INCREMENT PRIMARY KEY,
+       user_id BIGINT AUTO_INCREMENT PRIMARY KEY,
        name VARCHAR(255),
        email VARCHAR(255),
        phone VARCHAR(50),
@@ -9,7 +9,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE notifications (
-       id BIGINT AUTO_INCREMENT PRIMARY KEY,
+       notification_id BIGINT AUTO_INCREMENT PRIMARY KEY,
        user_id BIGINT,
        title VARCHAR(255),
        content TEXT,
@@ -26,11 +26,11 @@ CREATE TABLE notifications (
 
        CONSTRAINT fk_user
        FOREIGN KEY (user_id)
-       REFERENCES users(id)
+       REFERENCES users(user_id)
 );
 
 CREATE TABLE notification_preferences (
-      id BIGINT AUTO_INCREMENT PRIMARY KEY,
+      notification_preferences_id BIGINT AUTO_INCREMENT PRIMARY KEY,
       user_id BIGINT,
       channel_type VARCHAR(50),
       enabled BOOLEAN,
@@ -39,11 +39,11 @@ CREATE TABLE notification_preferences (
 
       CONSTRAINT fk_pref_user
       FOREIGN KEY (user_id)
-      REFERENCES users(id)
+      REFERENCES users(user_id)
 );
 
 CREATE TABLE recurring_notifications (
-     id BIGINT AUTO_INCREMENT PRIMARY KEY,
+     recurring_notifications_id BIGINT AUTO_INCREMENT PRIMARY KEY,
      notification_id BIGINT,
      cron_expression VARCHAR(255),
      next_execution_time TIMESTAMP,
@@ -52,5 +52,5 @@ CREATE TABLE recurring_notifications (
 
      CONSTRAINT fk_notification
      FOREIGN KEY (notification_id)
-     REFERENCES notifications(id)
+     REFERENCES notifications(notification_id)
 );

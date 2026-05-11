@@ -2,7 +2,7 @@ package com.jumio.notificationSystem;
 
 import com.jumio.notificationSystem.configs.RabbitMQConfig;
 import com.jumio.notificationSystem.enums.NotificationPriority;
-import com.jumio.notificationSystem.service.NotificationPublisher;
+import com.jumio.notificationSystem.queue.NotificationPublisher;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

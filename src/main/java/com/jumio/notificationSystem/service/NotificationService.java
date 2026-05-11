@@ -4,8 +4,10 @@ import com.jumio.notificationSystem.dto.SendNotificationRequest;
 import com.jumio.notificationSystem.entity.Notification;
 import com.jumio.notificationSystem.entity.User;
 import com.jumio.notificationSystem.enums.NotificationStatus;
+import com.jumio.notificationSystem.queue.NotificationPublisher;
 import com.jumio.notificationSystem.repository.NotificationRepository;
 import com.jumio.notificationSystem.repository.UserRepository;
+import com.jumio.notificationSystem.util.NotificationTemplateUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +34,14 @@ public class NotificationService {
         notification.setChannelType(request.getChannelType());
         notification.setPriority(request.getNotificationPriority());
         notification.setRetryCount(0);
+
+        String personalizedContent =
+                NotificationTemplateUtil.personalizeContent(
+                        request.getContent(),
+                        user
+                );
+
+        notification.setContent(personalizedContent);
 
         if (request.getScheduledDateTime() != null &&
                 request.getScheduledDateTime().isAfter(LocalDateTime.now())) {

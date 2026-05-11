@@ -1,8 +1,11 @@
-package com.jumio.notificationSystem.service;
+package com.jumio.notificationSystem.queue;
 
 import com.jumio.notificationSystem.entity.Notification;
 import com.jumio.notificationSystem.enums.NotificationStatus;
 import com.jumio.notificationSystem.repository.NotificationRepository;
+import com.jumio.notificationSystem.service.NotificationChannel;
+import com.jumio.notificationSystem.service.NotificationChannelFactory;
+import com.jumio.notificationSystem.service.RetryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -26,6 +29,7 @@ public class NotificationWorker {
 
         Notification notification = notificationRepository.findById(notificationId)
                 .orElseThrow(() -> new RuntimeException("Notification not found"));
+
 
         try {
 
