@@ -32,7 +32,7 @@ public class NotificationController {
         return notificationService.sendBulkNotifications(requests);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public Notification trackNotification(@PathVariable Long id) {
         return notificationService.trackNotification(id);
     }
