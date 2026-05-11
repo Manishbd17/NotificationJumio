@@ -43,7 +43,7 @@ Get Notification Status GET /api/v1/notifications/{id}
 
 Technologies Used
 
-Java 17, Spring Boot, Apache Kafka, H2 Database, Maven, JUnit, Mockito.
+Java 17, Spring Boot, Rabbit MQ , H2 Database, Maven, JUnit, Mockito.
 
 While using an IDE, we can right-click the main class and choose "Run" or use the IDE's run button.
 
