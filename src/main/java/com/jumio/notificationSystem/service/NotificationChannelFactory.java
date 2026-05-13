@@ -1,7 +1,9 @@
 package com.jumio.notificationSystem.service;
 
 import com.jumio.notificationSystem.enums.ChannelType;
+import org.springframework.stereotype.Component;
 
+@Component
 public class NotificationChannelFactory {
 
     private final EmailChannel emailChannel;

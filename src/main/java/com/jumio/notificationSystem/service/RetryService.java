@@ -26,17 +26,12 @@ public class RetryService {
         notification.setFailureReason(exception.getMessage());
 
         if (retryCount >= MAX_RETRIES) {
-
             notification.setStatus(NotificationStatus.FAILED);
-
         } else {
-
             long delay = (long) (BASE_DELAY_MINUTES * Math.pow(2, retryCount));
-
             notification.setStatus(NotificationStatus.RETRYING);
             notification.setNextRetryTime(LocalDateTime.now().plusMinutes(delay));
         }
-
         notificationRepository.save(notification);
     }
 }

@@ -25,7 +25,6 @@ public class SendNotificationRequest {
     private String content;
 
     private LocalDateTime localDateTime;
-
-    private LocalDateTime scheduledDateTime;
+    private LocalDateTime scheduledTime;
 
 }

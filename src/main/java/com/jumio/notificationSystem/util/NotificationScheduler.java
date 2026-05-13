@@ -8,11 +8,13 @@ import com.jumio.notificationSystem.repository.NotificationRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
+@Component
 @RequiredArgsConstructor
 public class NotificationScheduler {
 
@@ -22,20 +24,12 @@ public class NotificationScheduler {
     @Scheduled(fixedRate = 60000)
     public void processScheduledNotifications() {
 
-        List<Notification> notifications =
-                notificationRepository.findByStatusAndScheduledTimeBefore(
-                        NotificationStatus.PENDING,
-                        LocalDateTime.now()
-                );
+        List<Notification> notifications = notificationRepository.findByStatusAndScheduledTimeBefore(NotificationStatus.PENDING, LocalDateTime.now());
 
         for (Notification notification : notifications) {
-
             notification.setStatus(NotificationStatus.QUEUED);
-
             notificationRepository.save(notification);
-
             notificationPublisher.publish(notification);
-
             log.info("Scheduled notification queued: {}", notification.getNotificationId());
         }
     }
@@ -43,20 +37,12 @@ public class NotificationScheduler {
     @Scheduled(fixedRate = 60000)
     public void processRetries() {
 
-        List<Notification> notifications =
-                notificationRepository.findByStatusAndNextRetryTimeBefore(
-                        NotificationStatus.RETRYING,
-                        LocalDateTime.now()
-                );
+        List<Notification> notifications = notificationRepository.findByStatusAndNextRetryTimeBefore(NotificationStatus.RETRYING, LocalDateTime.now());
 
         for (Notification notification : notifications) {
-
             notification.setStatus(NotificationStatus.QUEUED);
-
             notificationRepository.save(notification);
-
             notificationPublisher.publish(notification);
-
             log.info("Retry notification queued: {}", notification.getNotificationId());
         }
     }

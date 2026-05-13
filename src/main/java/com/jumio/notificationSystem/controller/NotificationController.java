@@ -27,6 +27,7 @@ public class NotificationController {
     public Notification scheduleNotification(@Valid  @RequestBody SendNotificationRequest request) {
         return notificationService.scheduleNotification(request);
     }
+
     @PostMapping("/bulk")
     public List<Notification> sendBulkNotifications(@RequestBody List<SendNotificationRequest> requests) {
         return notificationService.sendBulkNotifications(requests);

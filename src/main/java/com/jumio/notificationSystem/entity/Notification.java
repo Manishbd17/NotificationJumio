@@ -21,17 +21,20 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long notificationId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    private Long userID;
 
     @Column(columnDefinition = "TEXT")
     private String content;
 
     private String title;
 
+    @Enumerated(EnumType.STRING)
     private ChannelType channelType;
+
+    @Enumerated(EnumType.STRING)
     private NotificationPriority priority;
+
+    @Enumerated(EnumType.STRING)
     private NotificationStatus status;
 
     private LocalDateTime scheduledTime;

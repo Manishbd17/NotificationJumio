@@ -27,76 +27,54 @@ public class NotificationService {
 
     public Notification sendNotification(SendNotificationRequest request) {
 
-        User user = userRepository.findById(request.getUserId())
-                .orElseThrow(() -> new UserNotFoundException("User not found"));
+        User user = userRepository.findById(request.getUserId()).orElseThrow(() -> new UserNotFoundException("User not found"));
 
         Notification notification =  new Notification();
-
-        notification.setUser(user);
+        notification.setUserID(user.getUserId());
         notification.setTitle(request.getTitle());
         notification.setContent(request.getContent());
         notification.setChannelType(request.getChannelType());
         notification.setPriority(request.getNotificationPriority());
         notification.setRetryCount(0);
 
-        String personalizedContent =
-                NotificationTemplateUtil.personalizeContent(
-                        request.getContent(),
-                        user
-                );
-
+        String personalizedContent = NotificationTemplateUtil.personalizeContent(request.getContent(), user);
         notification.setContent(personalizedContent);
 
-        if (request.getScheduledDateTime() != null &&
-                request.getScheduledDateTime().isAfter(LocalDateTime.now())) {
-
+        if (request.getScheduledTime() != null && request.getScheduledTime().isAfter(LocalDateTime.now())) {
             notification.setStatus(NotificationStatus.PENDING);
-            notification.setScheduledTime(request.getScheduledDateTime());
-
+            notification.setScheduledTime(request.getScheduledTime());
         } else {
             notification.setStatus(NotificationStatus.QUEUED);
         }
 
         Notification savedNotification = notificationRepository.save(notification);
-
         if (savedNotification.getStatus() == NotificationStatus.QUEUED) {
             notificationPublisher.publish(savedNotification);
         }
-
         return savedNotification;
     }
 
     public List<Notification> sendBulkNotifications(List<SendNotificationRequest> requests) {
-
-        return requests.stream()
-                .map(this::sendNotification)
-                .toList();
+        return requests.stream().map(this::sendNotification).toList();
     }
 
     public Notification trackNotification(Long id) {
-
-        return notificationRepository.findById(id)
-                .orElseThrow(() -> new NotificationNotFoundException("Notification not found"));
+        return notificationRepository.findById(id).orElseThrow(() -> new NotificationNotFoundException("Notification not found"));
     }
 
     public Notification scheduleNotification(@Valid SendNotificationRequest request) {
-        User user = userRepository.findById(request.getUserId())
-                .orElseThrow(() ->
+        User user = userRepository.findById(request.getUserId()).orElseThrow(() ->
                         new UserNotFoundException("User not found"));
 
         Notification notification = new Notification();
 
-        notification.setUser(user);
+        notification.setUserID(user.getUserId());
         notification.setTitle(request.getTitle());
         notification.setContent(request.getContent());
         notification.setChannelType(request.getChannelType());
         notification.setPriority(request.getNotificationPriority());
         notification.setStatus(NotificationStatus.PENDING);
-
-        notification.setScheduledTime(
-                request.getScheduledDateTime()
-        );
-
+        notification.setScheduledTime(request.getScheduledTime());
         notification.setRetryCount(0);
 
         return notificationRepository.save(notification);
