@@ -11,7 +11,11 @@ Unit tests for retry logic, priority handling and channel selection
 
 API Endpoints
 
-Register User POST /api/v1/users Sample Request : 
+1. Register User 
+
+POST http://localhost:8080/api/v1/users 
+
+Sample Request : 
 
 {
   "name": "John Root",
@@ -19,7 +23,11 @@ Register User POST /api/v1/users Sample Request :
   "phone": "9876543210"
 }
 
-Send Notification POST /api/v1/notifications/send Sample Request:
+2. Send Notification 
+
+POST http://localhost:8080/api/v1/notifications/send
+
+Sample Request:
 
 {
     "userId": 1,
@@ -29,7 +37,11 @@ Send Notification POST /api/v1/notifications/send Sample Request:
     "content": "Your payment was successful"
 }
 
-Schedule Notification POST /api/v1/notifications/send Sample Request:
+3. Schedule Notification
+
+POST http://localhost:8080/api/v1/notifications/schedule
+
+Sample Request:
 
 {
     "userId": 1,
@@ -40,9 +52,14 @@ Schedule Notification POST /api/v1/notifications/send Sample Request:
 }
 
 
-Bulk Notifications POST /api/v1/notifications/bulk
+4. Bulk Notifications
 
-Get Notification Status GET /api/v1/notifications/{id}
+POST http://localhost:8080/api/v1/notifications/bulk
+
+5. Track Notification 
+
+GET http://localhost:8080/api/v1/notifications/id/{id} 
+
 
 Technologies Used
 
