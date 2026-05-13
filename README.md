@@ -46,11 +46,21 @@ Get Notification Status GET /api/v1/notifications/{id}
 
 Technologies Used
 
-Java 17, Spring Boot, Rabbit MQ , H2 Database, Maven, JUnit, Mockito.
+Java 17, Spring Boot, Rabbit MQ , H2 Database, Maven, JUnit,Docker, Mockito.
+
 
 While using an IDE, we can right-click the main class and choose "Run" or use the IDE's run button.
 
 Once started , the application will run on port 8080 . We can verify that through postman or any API tester using this URL : http://localhost:8080
+
+Docker Command to connect to RabbitMQ instance  : 
+
+docker run -d \ 
+--hostname rabbitmq \
+--name rabbitmq \
+-p 5672:5672 \
+-p 15672:15672 \
+rabbitmq:3-management
 
 POSTMAN Collection URL to test the APIs : https://jumioassignment.postman.co/workspace/JumioAssignment~e955d62e-a66a-48a2-8589-39e8fd5ce6f6/collection/33479886-1115e3a7-21db-4c94-af5c-22f19d8540f9?action=share&source=copy-link&creator=33479886
 
